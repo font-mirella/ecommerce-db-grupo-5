@@ -319,7 +319,7 @@ INSERT INTO PedidoPagamento VALUES (4,  '45678901234', TIMESTAMP '2024-06-04 14:
 INSERT INTO PedidoPagamento VALUES (5,  '56789012345', TIMESTAMP '2024-06-05 08:00:00', 'Entregue',  105, DATE '2024-06-05', 'PIX',            'Aprovado');
 INSERT INTO PedidoPagamento VALUES (6,  '67890123456', TIMESTAMP '2024-06-06 16:20:00', 'Enviado',   106, DATE '2024-06-06', 'Cartão Crédito', 'Aprovado');
 INSERT INTO PedidoPagamento VALUES (7,  '78901234567', TIMESTAMP '2024-06-07 13:10:00', 'Entregue',  107, DATE '2024-06-07', 'PIX',            'Aprovado');
-INSERT INTO PedidoPagamento VALUES (8,  '89012345001', TIMESTAMP '2024-06-08 10:30:00', 'Processando',108,DATE '2024-06-08', 'Boleto',         'Pendente');
+INSERT INTO PedidoPagamento VALUES (8,  '89012345678', TIMESTAMP '2024-06-08 10:30:00', 'Processando',108,DATE '2024-06-08', 'Boleto',         'Pendente');
 INSERT INTO PedidoPagamento VALUES (9,  '90123456789', TIMESTAMP '2024-06-09 15:00:00', 'Cancelado', 109, DATE '2024-06-09', 'Cartão Crédito', 'Estornado');
 INSERT INTO PedidoPagamento VALUES (10, '01234567890', TIMESTAMP '2024-06-10 09:45:00', 'Entregue',  110, DATE '2024-06-10', 'PIX',            'Aprovado');
 INSERT INTO PedidoPagamento VALUES (11, '12345678901', TIMESTAMP '2024-06-11 11:00:00', 'Entregue',  111, DATE '2024-06-11', 'Cartão Crédito', 'Aprovado');

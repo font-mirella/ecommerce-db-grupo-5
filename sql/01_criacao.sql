@@ -6,9 +6,6 @@
 -- -------------------------------------------------------------
 -- REMOÇÃO DE TABELAS E SEQUENCES (PARA REEXECUÇÃO)
 -- -------------------------------------------------------------
--- Desativando constraints para facilitar o drop (opcional no Live SQL, 
--- mas boa prática é dropar na ordem inversa das FKs)
-
 DROP TABLE Pertence CASCADE CONSTRAINTS;
 DROP TABLE ItemPedido CASCADE CONSTRAINTS;
 DROP TABLE Atribui CASCADE CONSTRAINTS;

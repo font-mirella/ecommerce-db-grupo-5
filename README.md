@@ -8,8 +8,28 @@
 
 ## 📦 Sobre o Projeto
 
-Sistema de e-commerce desenvolvido como projeto prático da disciplina de Banco de Dados.  
-O banco gerencia usuários (clientes e funcionários), produtos, pedidos, pagamentos, entregas, transportadoras, promoções, reclamações e histórico de preços / cargos.
+Este repositório contém a implementação física (SQL) e o mapeamento lógico de um sistema de **E-Commerce**. O projeto foi desenvolvido seguindo as melhores práticas de modelagem relacional, garantindo integridade de dados e normalização até a 3ª Forma Normal.
+
+---
+
+## 📐 Decisões de Modelagem e Normalização
+
+Durante a transição do modelo conceitual (EER) para o relacional, aplicamos as seguintes etapas críticas:
+
+### 1. Relacionamento Temporal (M:N) - Histórico de Cargos
+O relacionamento entre **Funcionário** e **Cargo** foi mapeado como **N:N (Temporal)**.
+*   **Tabela:** `HistoricoCargos` (ou `Assume`).
+*   **Lógica:** A chave primária é composta por `(cpf_funcionario, cargo, data_admissao)`. Isso permite que um funcionário assuma o mesmo cargo múltiplas vezes em datas diferentes, mantendo o histórico de admissão e saída completo.
+
+### 2. Fusão 1:1 - Pedido e Pagamento
+Para otimização de consultas e simplificação do modelo (visto que no nosso domínio cada pedido exige exatamente um pagamento e vice-versa):
+*   **Tabela:** `PedidoPagamento`.
+*   **Lógica:** Unificamos os atributos de Pedido (status, data/hora) e Pagamento (meio, status transação) em uma única entidade, utilizando `cod_pedido` como identificador único central.
+
+### 3. Normalização e Integridade
+*   **1FN:** Atomização de endereços e separação de telefones multivalorados.
+*   **2FN:** Dependência total da chave primária em tabelas associativas como `ItemPedido` e `Pertence`.
+*   **3FN:** Eliminação de atributos derivados (ValorTotal, NotaMedia) para evitar redundância.
 
 ---
 
@@ -18,35 +38,29 @@ O banco gerencia usuários (clientes e funcionários), produtos, pedidos, pagame
 ```
 Projeto_BD/
 ├── README.md
-├── docs/
-│   ├── AV1GRUPO5.html              ← Diagrama EER (AV1)
-│   ├── AV2GRUPO5.html              ← Esquema Relacional Normalizado (AV2)
+├── docs/                           ← Documentação da AV1 e AV2
+│   ├── AV1GRUPO5.html              ← Diagrama EER
 │   ├── AV2_Relacional_Normalizado.md
 │   └── Minimundo_Atualizado_Final.md
-└── sql/
+└── sql/                            ← Scripts de execução (Oracle Live SQL)
     ├── 01_criacao.sql              ← CREATE TABLE, SEQUENCE, CONSTRAINT, CHECK
-    └── 02_povoamento.sql           ← INSERT INTO (dados coerentes com o domínio)
+    └── 02_povoamento.sql           ← INSERT INTO rico e coerente
 ```
 
 ---
 
-## 🛠️ Como Executar
+## 🛠️ Como Executar no Oracle Live SQL
 
-1. Acesse o [Oracle Live SQL](https://livesql.oracle.com/)
-2. Faça login com uma conta Oracle gratuita
-3. Execute **`01_criacao.sql`** primeiro (drop + create das tabelas e sequences)
-4. Em seguida, execute **`02_povoamento.sql`** para popular o banco
-
-> ⚠️ Sempre execute a criação antes do povoamento. Caso queira reiniciar, basta rodar o bloco `DROP` no início de `01_criacao.sql`.
+1. Execute o script **`01_criacao.sql`**: Limpa o ambiente e cria a estrutura física.
+2. Execute o script **`02_povoamento.sql`**: Popula o banco com dados realistas.
 
 ---
 
-## ✅ Checklist AV3
+## ✅ Checklist da Entrega (AV3)
 
-| Item obrigatório         | Arquivo              | Status |
-|--------------------------|----------------------|--------|
-| `CREATE TABLE`           | `01_criacao.sql`     | ✅     |
-| `INSERT INTO`            | `02_povoamento.sql`  | ✅     |
-| `CONSTRAINT` em `CREATE` | `01_criacao.sql`     | ✅     |
-| `CREATE SEQUENCE`        | `01_criacao.sql`     | ✅     |
-| Cláusula `CHECK`         | `01_criacao.sql`     | ✅     |
+- [x] **CREATE TABLE** com constraints.
+- [x] **INSERT INTO** com dados reais.
+- [x] **CONSTRAINT** (Primary Key e Foreign Key).
+- [x] **CREATE SEQUENCE** para IDs.
+- [x] **CLÁUSULA CHECK** para validações.
+- [x] **Organização** completa do repositório.
