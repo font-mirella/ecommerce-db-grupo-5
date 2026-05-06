@@ -1,4 +1,4 @@
-# Projeto de Banco de Dados – Grupo 5 (2026.1)
+# ecommerce-db-grupo-5 (2026.1)
 
 **Disciplina:** Banco de Dados – UFPE CIn  
 **Turma:** 2026.1  
