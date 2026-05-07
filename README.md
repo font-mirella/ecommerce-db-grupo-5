@@ -6,13 +6,13 @@
 
 ---
 
-## 📦 Sobre o Projeto
+## Sobre o Projeto
 
 Este repositório contém a implementação física (SQL) e o mapeamento lógico de um sistema de **E-Commerce**. O projeto foi desenvolvido seguindo as melhores práticas de modelagem relacional, garantindo integridade de dados e normalização até a 3ª Forma Normal.
 
 ---
 
-## 📐 Decisões de Modelagem e Normalização
+## Decisões de Modelagem e Normalização
 
 Durante a transição do modelo conceitual (EER) para o relacional, aplicamos as seguintes etapas críticas:
 
@@ -49,7 +49,7 @@ Projeto_BD/
 
 ---
 
-## 🛠️ Como Executar no Oracle Live SQL
+## Como Executar no Oracle Live SQL
 
 1. Execute o script **`01_criacao.sql`**: Limpa o ambiente e cria a estrutura física.
 2. Execute o script **`02_povoamento.sql`**: Popula o banco com dados realistas.
