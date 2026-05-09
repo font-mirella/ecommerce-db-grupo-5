@@ -188,18 +188,21 @@ DECLARE
         preco Produto.preco%TYPE,
         estq  Produto.quantidade_estoque%TYPE
     );
-    TYPE t_lista IS TABLE OF t_prod INDEX BY PLS_INTEGER; -- [PL-05]
+    TYPE t_lista IS TABLE OF t_prod INDEX BY BINARY_INTEGER; -- [PL-05]
     v_lista  t_lista;
     v_classe VARCHAR2(15);
-    v_i      PLS_INTEGER := 1;
+    v_i      BINARY_INTEGER := 1;
 BEGIN
     FOR r IN (SELECT cod_produto, nome, preco, quantidade_estoque  -- [PL-10]
-                FROM Produto WHERE quantidade_estoque <= 15 ORDER BY quantidade_estoque) LOOP
+                FROM Produto WHERE quantidade_estoque <= 15 
+                ORDER BY quantidade_estoque) 
+    LOOP
         v_lista(v_i) := t_prod_rec(r.cod_produto, r.nome, r.preco, r.quantidade_estoque);
         v_i := v_i + 1;
     END LOOP;
 
-    FOR i IN 1 .. v_lista.COUNT LOOP
+    FOR i IN 1 .. v_lista.COUNT 
+    LOOP
         IF    v_lista(i).preco < 200  THEN v_classe := 'Econômico'; -- [PL-06]
         ELSIF v_lista(i).preco < 1000 THEN v_classe := 'Médio';
         ELSIF v_lista(i).preco < 2500 THEN v_classe := 'Premium';
@@ -220,7 +223,7 @@ DECLARE
     v_ped   Pedido%ROWTYPE;       -- [PL-04]
     v_nome  Usuario.nome%TYPE;    -- [PL-02]
     v_icone VARCHAR2(6);
-    v_cod   PLS_INTEGER := 1;
+    v_cod   BINARY_INTEGER := 1;
 BEGIN
     LOOP                                                         -- [PL-08]
         EXIT WHEN v_cod > 18;
@@ -250,7 +253,7 @@ END;
 DECLARE
     v_meta CONSTANT NUMBER := 10000;
     v_acum NUMBER := 0;
-    v_cod  PLS_INTEGER := 1;
+    v_cod  BINARY_INTEGER := 1;
     v_val  NUMBER;
 BEGIN
     WHILE v_acum < v_meta LOOP
