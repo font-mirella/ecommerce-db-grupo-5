@@ -1,5 +1,5 @@
 -- =============================================================
--- SCRIPT DE CONSULTAS E PL/SQL — AV4
+-- SCRIPT DE CONSULTAS E PL/SQL — AV4 
 -- Grupo 5 | CIN0137- Banco de Dados | Prof. Valéria Times
 -- Checklist: 26 SQL + 20 PL = 46 itens
 -- =============================================================
