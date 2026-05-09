@@ -43,6 +43,7 @@ ecommerce-db-grupo-5/
 └── sql/                            
     ├── 01_criacao.sql              -- DDL: Tabelas, Sequências e Constraints
     ├── 02_povoamento.sql           -- DML: Inserção de dados para teste
+    ├── 02_povoamento_v2.sql        -- DML: Versão expandida para teste de relatórios
     ├── 03_consultas_checklist.sql  -- DQL/PL-SQL: Atendimento aos requisitos da disciplina
     └── 04_relatorios_finais.sql    -- DQL: Consultas de negócio e relatórios gerenciais
 ```
@@ -54,7 +55,7 @@ ecommerce-db-grupo-5/
 Para garantir o funcionamento correto das referências e chaves estrangeiras, execute os scripts na ordem numérica indicada na pasta sql:
 
 1.  Execute **01_criacao.sql**: Prepara o esquema do banco de dados.
-2.  Execute **02_povoamento.sql**: Popula as tabelas com dados de exemplo.
+2.  Execute **02_povoamento.sql** (ou **02_povoamento_v2.sql** para testes mais complexos): Popula o banco com dados realistas.
 3.  Execute **03_consultas_checklist.sql** ou **04_relatorios_finais.sql** conforme a necessidade de análise.
 
 Para um guia detalhado sobre como utilizar o Oracle Live SQL, consulte o arquivo [docs/walkthrough_oracle_livesql.md](file:///Users/willian/.gemini/antigravity/brain/c7c5fd44-fd21-4cd2-9d65-4b154120adc8/walkthrough_oracle_livesql.md).
