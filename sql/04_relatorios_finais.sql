@@ -89,7 +89,8 @@ ORDER BY ticket_medio DESC;
 -- [7.3] Qual o tempo médio de entrega por transportadora?
 -- Diferença entre a data de postagem e a data efetiva de entrega.
 SELECT t.nome AS transportadora,
-       ROUND(AVG(EXTRACT(DAY FROM (e.data_hora_entrega - CAST(e.data_postagem AS TIMESTAMP)))), 1) || ' dias' AS tempo_medio_entrega
+       -- O Truc 'zera' as horas (meia-noite) para que a subtração resulte em dias inteiros
+       ROUND(AVG(TRUNC(e.data_hora_entrega) - e.data_postagem), 1) || ' dias' AS tempo_medio_entrega
 FROM Entrega e
 JOIN Transportadora t ON e.cnpj_transportadora = t.cnpj
 WHERE e.data_hora_entrega IS NOT NULL
