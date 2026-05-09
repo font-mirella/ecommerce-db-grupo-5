@@ -1,0 +1,91 @@
+🗄️ PARTE 1: Consultas SQL (DML e DQL)
+1. O Relatório dos "Top 10" (Baseado na AV1):
+
+O que fazer: Crie uma VIEW que liste o nome dos 10 produtos mais vendidos no último mês, junto com a quantidade total vendida de cada um.
+
+Itens do Checklist sugeridos: 25 (CREATE VIEW), 6 (SELECT), 11 (INNER JOIN), 15 (COUNT ou SUM), 21 (ORDER BY), 22 (GROUP BY).
+
+2. A Métrica de Pagamentos (Baseado na AV1):
+
+O que fazer: Escreva uma consulta que retorne o "ticket médio" (valor médio) dos pedidos agrupados por meio_pagamento, mas mostre apenas os meios de pagamento cujo ticket médio seja maior que um determinado valor (ex: maior que R$ 200).
+
+Itens do Checklist sugeridos: 14 (AVG), 22 (GROUP BY), 23 (HAVING), 11 (INNER JOIN).
+
+3. O Gargalo Logístico (Baseado na AV1):
+
+O que fazer: Uma consulta que calcule o tempo médio (em dias) entre a data_postagem e a data_hora_entrega agrupado por Transportadora. Garanta que pedidos que ainda não foram entregues sejam ignorados.
+
+Itens do Checklist sugeridos: 10 (IS NOT NULL), 14 (AVG), 22 (GROUP BY), 11 (INNER JOIN).
+
+4. A Dor de Cabeça dos Produtos (Baseado na AV1):
+
+O que fazer: Liste TODOS os produtos do catálogo e o número de reclamações registradas para cada um. É obrigatório que produtos com ZERO reclamações também apareçam na lista com o valor 0.
+
+Itens do Checklist sugeridos: 16 (LEFT ou RIGHT OUTER JOIN), 15 (COUNT), 22 (GROUP BY), 21 (ORDER BY).
+
+5. O Clube dos Esquecidos (Baseado na AV1):
+
+O que fazer: Escreva uma consulta para descobrir o nome e o código dos produtos que possuem o menor número de avaliações (notas) já dadas no sistema.
+
+Itens do Checklist sugeridos: 17 (SUBCONSULTA COM OP. RELACIONAL) ou 20 (SUBCONSULTA COM ALL), 13 (MIN), 22 (GROUP BY).
+
+6. Rastreio Específico (Baseado na AV1):
+
+O que fazer: Liste o código do pedido, a data do pedido e o status de entrega para pedidos feitos por um cliente cujo nome comece com a letra "A" (ou outra de sua escolha), desde que esses pedidos estejam com o status "Em entrega" ou "Enviado".
+
+Itens do Checklist sugeridos: 9 (LIKE), 8 (IN - na cláusula WHERE para os status), 11 (INNER JOIN).
+
+7. Economia Premium (Baseado na AV1):
+
+O que fazer: Mostre o nome de clientes com assinatura "Premium" que utilizaram promoções num período específico do ano passado, além do total em dinheiro que a promoção abateu (ou o valor total do pedido após o percentual).
+
+Itens do Checklist sugeridos: 7 (BETWEEN - para as datas), 11 (INNER JOIN), 22 (GROUP BY).
+
+8. O Funcionário-Cliente (Consulta de Conjuntos):
+
+O que fazer: Retorne o CPF e Nome das pessoas que são, simultaneamente, Clientes (com algum pedido já feito) e Funcionários (de determinado cargo).
+
+Itens do Checklist sugeridos: 24 (INTERSECT), 6 (SELECT).
+
+9. A Grande Limpeza (Atualização em Massa):
+
+O que fazer: Aumente o limite de quantidade em estoque (UPDATE) ou insira novos registros de promoção (INSERT INTO com SELECT) para produtos que não foram vendidos no último ano.
+
+Itens do Checklist sugeridos: 4 (UPDATE) ou 3 (INSERT INTO), 18 (SUBCONSULTA COM IN ou NOT IN).
+
+⚙️ PARTE 2: Programação PL/SQL
+10. O Caçador de Estoque Zerado (Baseado na AV1):
+
+O que fazer: Crie uma PROCEDURE que receba o nome de uma Categoria como parâmetro. A procedure deve usar um cursor implícito para iterar e imprimir (usando DBMS_OUTPUT) os nomes de todos os produtos daquela categoria que estão com quantidade_estoque igual a zero.
+
+Itens do Checklist sugeridos: 4 (CREATE PROCEDURE), 12 (FOR IN LOOP), 16 (USO DE PARAMETROS IN).
+
+11. A Máquina do Tempo de Preços (Baseado na AV1):
+
+O que fazer: Crie um Bloco Anônimo com um cursor explícito que receba o ID de um produto. Ele deve buscar todo o HistoricoPrecos desse produto e imprimir uma linha do tempo das mudanças.
+
+Itens do Checklist sugeridos: 3 (BLOCO ANÔNIMO), 14 (CURSOR OPEN, FETCH, CLOSE), 11 (WHILE LOOP ou LOOP EXIT WHEN), 6 (%TYPE).
+
+12. O Escudo do Estoque (Trigger de Validação):
+
+O que fazer: Crie uma TRIGGER de nível de linha que dispare antes de um INSERT na tabela ItemPedido. Ela deve verificar se a quantidade solicitada no pedido é maior que a quantidade_estoque do Produto. Se for, deve barrar a inserção levantando um erro.
+
+Itens do Checklist sugeridos: 20 (CREATE TRIGGER LINHA), 8 (IF ELSIF), 15 (EXCEPTION WHEN), 13 (SELECT ... INTO).
+
+13. O Guardião das Reclamações (Trigger de Auditoria):
+
+O que fazer: Crie uma tabela de "Log_Reclamacao" usando ALTER TABLE / CREATE TABLE. Em seguida, crie uma TRIGGER de comando (ou de linha) que dispare sempre que o status de uma Reclamacao for alterado (UPDATE), classificando a severidade da mudança com uma estrutura condicional e gravando no log.
+
+Itens do Checklist sugeridos: 1 (ALTER TABLE - criar a tabela de log entra aqui como preparação), 19 (CREATE TRIGGER COMANDO), 9 (CASE WHEN).
+
+14. A Evolução das Notas (Baseado na AV1):
+
+O que fazer: Crie uma FUNCTION que receba o ID de um produto e retorne um tipo estruturado ou um cálculo matemático complexo da evolução média da nota dele.
+
+Itens do Checklist sugeridos: 5 (CREATE FUNCTION), 1 (USO DE RECORD), 7 (%ROWTYPE).
+
+15. O Pacote do Gerente (O "Megazord" de PL):
+
+O que fazer: Empacote algumas regras de negócio. Crie um PACKAGE e um PACKAGE BODY chamado PKG_GESTAO_ECOMMERCE. Dentro dele, coloque variáveis globais, uma procedure para dar desconto em massa (usando TYPE TABLE) e a function criada no item anterior.
+
+Itens do Checklist sugeridos: 17 (CREATE PACKAGE), 18 (CREATE PACKAGE BODY), 2 (USO DE ESTRUTURA DE DADOS DO TIPO TABLE).
