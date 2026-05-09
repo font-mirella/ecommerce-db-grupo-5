@@ -91,7 +91,10 @@ SELECT pd.cod_pedido, pd.status, pg.meio_pagamento
   FROM Pagamento pg RIGHT OUTER JOIN Pedido pd ON pd.cod_pedido = pg.pedido;
 
 -- FULL: clientes vs funcionários — quem é só um dos dois
-SELECT NVL(c.cpf_cliente, f.cpf_funcionario) AS cpf,
+SELECT CASE 
+           WHEN c.cpf_cliente IS NOT NULL THEN c.cpf_cliente 
+           ELSE f.cpf_funcionario 
+       END AS cpf,
        c.tipo_assinatura, f.matricula
   FROM Cliente c FULL OUTER JOIN Funcionario f
     ON f.cpf_funcionario = c.cpf_cliente;
@@ -163,7 +166,10 @@ CREATE OR REPLACE FUNCTION fn_valor_pedido (
 ) RETURN NUMBER AS
     v_total NUMBER;
 BEGIN
-    SELECT NVL(SUM(valor_unitario * quantidade), 0)
+    SELECT CASE 
+               WHEN SUM(valor_unitario * quantidade) IS NULL THEN 0 
+               ELSE SUM(valor_unitario * quantidade) 
+           END
       INTO v_total FROM ItemPedido WHERE cod_pedido = p_cod;
     RETURN v_total;
 EXCEPTION WHEN OTHERS THEN RETURN -1;
@@ -249,7 +255,10 @@ DECLARE
 BEGIN
     WHILE v_acum < v_meta LOOP
         EXIT WHEN v_cod > 18;
-        SELECT NVL(SUM(valor_unitario * quantidade), 0)
+        SELECT CASE 
+                   WHEN SUM(valor_unitario * quantidade) IS NULL THEN 0 
+                   ELSE SUM(valor_unitario * quantidade) 
+               END
           INTO v_val FROM ItemPedido WHERE cod_pedido = v_cod;
         v_acum := v_acum + v_val;
         DBMS_OUTPUT.PUT_LINE('Pedido #' || v_cod || ' | Acumulado: R$' || ROUND(v_acum,2));
