@@ -8,7 +8,7 @@
 
 ## Sobre o Projeto
 
-Este repositório contém a implementação física (SQL) e o mapeamento lógico de um sistema de **E-Commerce**. O projeto foi desenvolvido seguindo as melhores práticas de modelagem relacional, garantindo integridade de dados e normalização até a 3ª Forma Normal.
+Este repositório contém a implementação física (SQL), mapeamento lógico e relatórios de um sistema de E-Commerce. O projeto foi desenvolvido seguindo as melhores práticas de modelagem relacional, garantindo integridade de dados e normalização até a 3ª Forma Normal.
 
 ---
 
@@ -17,50 +17,57 @@ Este repositório contém a implementação física (SQL) e o mapeamento lógico
 Durante a transição do modelo conceitual (EER) para o relacional, aplicamos as seguintes etapas críticas:
 
 ### 1. Relacionamento Temporal (M:N) - Histórico de Cargos
-O relacionamento entre **Funcionário** e **Cargo** foi mapeado como **N:N (Temporal)**.
-*   **Tabela:** `HistoricoCargos` (ou `Assume`).
-*   **Lógica:** A chave primária é composta por `(cpf_funcionario, cargo, data_admissao)`. Isso permite que um funcionário assuma o mesmo cargo múltiplas vezes em datas diferentes, mantendo o histórico de admissão e saída completo.
+O relacionamento entre Funcionário e Cargo foi mapeado como N:N (Temporal).
+*   **Tabela:** HistoricoCargos.
+*   **Lógica:** A chave primária é composta por (cpf_funcionario, cargo, data_admissao). Isso permite que um funcionário assuma o mesmo cargo múltiplas vezes em datas diferentes, mantendo o histórico de admissão e saída completo.
 
-### 2. Fusão 1:1 - Pedido e Pagamento
-Para otimização de consultas e simplificação do modelo (visto que no nosso domínio cada pedido exige exatamente um pagamento e vice-versa):
-*   **Tabela:** `PedidoPagamento`.
-*   **Lógica:** Unificamos os atributos de Pedido (status, data/hora) e Pagamento (meio, status transação) em uma única entidade, utilizando `cod_pedido` como identificador único central.
-
-### 3. Normalização e Integridade
+### 2. Normalização e Integridade
 *   **1FN:** Atomização de endereços e separação de telefones multivalorados.
-*   **2FN:** Dependência total da chave primária em tabelas associativas como `ItemPedido` e `Pertence`.
-*   **3FN:** Eliminação de atributos derivados (ValorTotal, NotaMedia) para evitar redundância.
+*   **2FN:** Dependência total da chave primária em tabelas associativas como ItemPedido e Pertence.
+*   **3FN:** Eliminação de atributos derivados para evitar redundância.
 
 ---
 
-## 📁 Estrutura do Repositório
+## Estrutura do Repositório
+
+O projeto está organizado de forma a facilitar a execução sequencial dos scripts no Oracle Live SQL ou ambientes similares.
 
 ```
-Projeto_BD/
+ecommerce-db-grupo-5/
 ├── README.md
-├── docs/                           ← Documentação da AV1 e AV2
-│   ├── AV1GRUPO5.html              ← Diagrama EER
-│   ├── AV2_Relacional_Normalizado.md
-│   └── Minimundo_Atualizado_Final.md
-└── sql/                            ← Scripts de execução (Oracle Live SQL)
-    ├── 01_criacao.sql              ← CREATE TABLE, SEQUENCE, CONSTRAINT, CHECK
-    └── 02_povoamento.sql           ← INSERT INTO rico e coerente
+├── docs/                           
+│   ├── AV1 GRUPO 5.pdf             -- Documentação da AV1
+│   ├── AV2-Grupo-5.pdf             -- Documentação da AV2
+│   ├── plano.txt                   -- Planejamento de consultas e checklist
+│   └── walkthrough_oracle_livesql.md -- Guia de execução passo a passo
+└── sql/                            
+    ├── 01_criacao.sql              -- DDL: Tabelas, Sequências e Constraints
+    ├── 02_povoamento.sql           -- DML: Inserção de dados para teste
+    ├── 03_consultas_checklist.sql  -- DQL/PL-SQL: Atendimento aos requisitos da disciplina
+    └── 04_relatorios_finais.sql    -- DQL: Consultas de negócio e relatórios gerenciais
 ```
 
 ---
 
-## Como Executar no Oracle Live SQL
+## Instruções de Execução
 
-1. Execute o script **`01_criacao.sql`**: Limpa o ambiente e cria a estrutura física.
-2. Execute o script **`02_povoamento.sql`**: Popula o banco com dados realistas.
+Para garantir o funcionamento correto das referências e chaves estrangeiras, execute os scripts na ordem numérica indicada na pasta sql:
+
+1.  Execute **01_criacao.sql**: Prepara o esquema do banco de dados.
+2.  Execute **02_povoamento.sql**: Popula as tabelas com dados de exemplo.
+3.  Execute **03_consultas_checklist.sql** ou **04_relatorios_finais.sql** conforme a necessidade de análise.
+
+Para um guia detalhado sobre como utilizar o Oracle Live SQL, consulte o arquivo [docs/walkthrough_oracle_livesql.md](file:///Users/willian/.gemini/antigravity/brain/c7c5fd44-fd21-4cd2-9d65-4b154120adc8/walkthrough_oracle_livesql.md).
 
 ---
 
-## ✅ Checklist da Entrega (AV3)
+## Checklist da Entrega
 
-- [x] **CREATE TABLE** com constraints.
-- [x] **INSERT INTO** com dados reais.
-- [x] **CONSTRAINT** (Primary Key e Foreign Key).
-- [x] **CREATE SEQUENCE** para IDs.
-- [x] **CLÁUSULA CHECK** para validações.
-- [x] **Organização** completa do repositório.
+- [x] CREATE TABLE com constraints adequadas.
+- [x] INSERT INTO com dados realistas e coerentes.
+- [x] CONSTRAINT (Primary Key e Foreign Key) implementadas.
+- [x] CREATE SEQUENCE para geração automática de identificadores.
+- [x] CLÁUSULA CHECK para validações de domínio.
+- [x] Consultas SQL (Select, Joins, Group By, Having).
+- [x] Blocos PL/SQL (Procedures, Functions, Triggers e Packages).
+- [x] Organização sistemática do repositório.
