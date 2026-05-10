@@ -624,15 +624,15 @@ INSERT INTO ItemPedido VALUES (30, 25, 30, NULL, 3,   42.90, 4.0, 'Creme hidrata
 -- Pedido 31 — Vitor Magalhães (Mar 2025)
 INSERT INTO ItemPedido VALUES (31, 27, 28, 15,   1, 3799.00, 5.0, 'Câmera Sony espetacular');
 -- Pedido 32 — Carla Mendes (Cancelado)
-INSERT INTO ItemPedido VALUES (32, 26, NULL, NULL, 1, 1350.00, NULL, NULL);
+INSERT INTO ItemPedido VALUES (32, 26, 30, NULL, 1, 1350.00, NULL, NULL);
 -- Pedido 33 — Yasmin Leal (Abr 2025)
 INSERT INTO ItemPedido VALUES (33, 3,  29, 16,   2,  599.90, 4.0, 'Nike confortável para o dia a dia');
 INSERT INTO ItemPedido VALUES (33, 28, 29, NULL, 1,  149.90, 3.5, 'Bermuda ok, tecido um pouco grosso');
 -- Pedido 34 — Zé Augusto Lima (Mai 2025, Enviado)
 INSERT INTO ItemPedido VALUES (34, 15, 30, 17,   1, 1799.00, NULL, NULL);
 -- Pedido 35 — Olívia Cardoso (Dia das Mães, Pendente)
-INSERT INTO ItemPedido VALUES (35, 25, NULL, 17,  4,   42.90, NULL, NULL);
-INSERT INTO ItemPedido VALUES (35, 7,  NULL, NULL, 2,  249.90, NULL, NULL);
+INSERT INTO ItemPedido VALUES (35, 25, 30, 17,  4,   42.90, NULL, NULL);
+INSERT INTO ItemPedido VALUES (35, 7,  30, NULL, 2,  249.90, NULL, NULL);
 
 
 -- =============================================================

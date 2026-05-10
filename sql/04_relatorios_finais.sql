@@ -19,14 +19,12 @@ ORDER BY total_reclamacoes DESC;
 
 
 -- [6.2] Quais pedidos de um cliente estão com status "Enviado" (em entrega)?
--- Substitua '12345678901' pelo CPF desejado.
 SELECT cod_pedido, 
        data_hora, 
        status
 FROM Pedido
-WHERE cpf_cliente = '12345678901' 
+WHERE cpf_cliente = '23456789012' -- Cliente Bruno Souza
   AND status = 'Enviado';
-
 
 -- [6.3] Qual o histórico de preços de um determinado produto?
 -- Exibe a evolução dos valores registrados para o produto 1.
